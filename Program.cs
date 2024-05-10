@@ -42,7 +42,7 @@ List<GameDto> games = [
 app.MapGet("games", ()=> games);
 
 //getting a game by its ID
-app.MapGet("games/{id}", ( int id) => games.Find(game => game.Id == id) ).WithName(GameEndpoint);
+app.MapGet("games/{id}", ( int id ) => games.Find(game => game.Id == id) ).WithName(GameEndpoint);
 
 //creating a game
 app.MapPost("games", ( CreateGameDto newGame) =>
@@ -57,6 +57,28 @@ app.MapPost("games", ( CreateGameDto newGame) =>
         games.Add(game);
 
         return Results.CreatedAtRoute(GameEndpoint, new {id = game.Id}, game);
+});
+
+// updating a game 
+app.MapPut("games/{id}", (int id, UpdateGameDto updatedGame)=>{
+    var index = games.FindIndex(game => game.Id == id);
+
+    games[index] = new GameDto(
+        id,
+        updatedGame.Name,
+        updatedGame.Genre,
+        updatedGame.Price,
+        updatedGame.ReleaseDate
+    );
+
+    return Results.NoContent();
+});
+
+// deleting a game
+app.MapDelete("games/{id}", (int id)=>{
+    games.RemoveAll(game => game.Id == id);
+
+    return Results.NoContent();
 });
 
 
