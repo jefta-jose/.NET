@@ -14,7 +14,9 @@ structure defined in the GameDto class.
 new (...): This syntax is used to create a new instance of an 
 object. In this case, it's creating a new GameDto object.
 */
-List<GameDto> games = [
+
+
+List<GameDto> games = [ // THIS LIST METHOD IS USED WHEN WE HAVE PREDEFINED VALEUS 
     new(
         1,
         "God Of War",
@@ -47,14 +49,14 @@ app.MapGet("games/{id}", ( int id ) => games.Find(game => game.Id == id) ).WithN
 //creating a game
 app.MapPost("games", ( CreateGameDto newGame) =>
 {
-    GameDto game = new(
-        games.Count + 1,
+    GameDto game = new(  // we are creating a single game of type GameDto
+        games.Count + 1, // count the number of games and increment them by one and set it as the new id.
         newGame.Name,
         newGame.Genre,
         newGame.Price,
         newGame.ReleaseDate);
 
-        games.Add(game);
+        games.Add(game); // from our list of games we want to add a new game
 
         return Results.CreatedAtRoute(GameEndpoint, new {id = game.Id}, game);
 });
