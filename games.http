@@ -9,7 +9,6 @@ POST http://localhost:5244/games
 Content-Type: application/json
 
 {
-    "Name": "Mortal Kombat",
     "Genre": "Fighting",
     "Price": 23.67,
     "ReleaseDate": "2019-12-01"
@@ -19,12 +18,12 @@ Content-Type: application/json
 PUT http://localhost:5244/games/2
 Content-Type: application/json
 
-{
-    "Name": "Mortal Kombat",
-    "Genre": "Fighting",
-    "Price": 23.67,
-    "ReleaseDate": "2019-12-13"
-}
+  {
+    "name": "WatchDogs Legion",
+    "genre": "Free Roam",
+    "price": 99.76,
+    "releaseDate": "2008-10-26"
+  }
 
 ### delete a game
-DELETE http://localhost:5244/games/2
+DELETE http://localhost:5244/games/4
